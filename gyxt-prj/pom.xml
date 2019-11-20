@@ -9,5 +9,6 @@
     <module>gyxt-commons</module>
     <module>gyxt-server</module>
     <module>gyxt</module>
+    <module>gyxt-shiro</module>
   </modules>
 </project>
