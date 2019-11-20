@@ -8,5 +8,6 @@
   <modules>
     <module>gyxt-commons</module>
     <module>gyxt-server</module>
+    <module>gyxt</module>
   </modules>
 </project>
