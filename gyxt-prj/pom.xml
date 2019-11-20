@@ -7,5 +7,6 @@
   <packaging>pom</packaging>
   <modules>
     <module>gyxt-commons</module>
+    <module>gyxt-server</module>
   </modules>
 </project>
