@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/context
+							http://www.springframework.org/schema/context/spring-context.xsd
+							http://www.springframework.org/schema/mvc
+							http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 开启Spring MVC的注解扫描机制 [BEGIN] -->
+		<mvc:annotation-driven/>
+	<!-- 开启Spring MVC的注解扫描机制 [END] -->
+	
+	<!-- 设定Spring MVC注解扫描基础包位置 [BEGIN] -->
+		<context:component-scan base-package="cn.ekgc.gyxt">
+			<!-- 对于SpringMVC来说，解决的是请求映射问题，只需要管理@Controller这个注解即可 -->
+			<!-- 特别是对于@Service这个注解，除了能够将类纳入Spring管理之外，它还能够进行事务处理 -->
+			<!-- 而SpringMVC是不具备事务处理能力的，因此SpringMVC是不能扫描@Service -->
+			<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+			<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		</context:component-scan>
+	<!-- 设定Spring MVC注解扫描基础包位置 [END] -->
+	
+	<!-- 配置Spring MVC的转发视图解析器 [BEGIN] -->
+		<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+			<!-- 配置转发的前后缀信息 -->
+			<property name="prefix" value="/WEB-INF/view/"/>
+			<property name="suffix" value=".jsp"/>
+		</bean>
+	<!-- 配置Spring MVC的转发视图解析器 [END] -->
+	
+	<!-- 为了能够让注解@ResponseBody工作，也就是让返回的数据能够变成一个JSON，那么需要配置JSON的视图解析器 [BEGIN] -->
+	<bean id="jsonResolver" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<!-- 为了防止在转换的过程中出现乱码，需要配置编码格式 -->
+		<property name="defaultCharset" value="UTF-8"/>
+		<!-- 转换的消息头信息 -->
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 因为SpringMVC拦截的是所有的请求，因此需要对于静态资源不进行任何处理直接方法 [BEGIN] -->
+		<mvc:default-servlet-handler/>
+	<!-- 因为SpringMVC拦截的是所有的请求，因此需要对于静态资源不进行任何处理直接方法 [END] -->
+</beans>							

@@ -21,6 +21,14 @@
 	  </properties>
 
 	  <dependencies>
+	  
+	  		<!-- 添加gyxt-commons的依赖关系 -->
+		  	<dependency>
+		  		<groupId>cn.ekgc.gyxt</groupId>
+		        <artifactId>gyxt-commons</artifactId>
+		        <version>${parent.version}</version>
+		  	</dependency>
+	  
 		    <dependency>
 			      <groupId>junit</groupId>
 			      <artifactId>junit</artifactId>

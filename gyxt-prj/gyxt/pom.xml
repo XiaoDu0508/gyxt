@@ -22,6 +22,21 @@
   </properties>
 
   <dependencies>
+  
+    <!-- 添加gyxt-server的依赖关系 -->
+  	<dependency>
+  		<groupId>cn.ekgc.gyxt</groupId>
+        <artifactId>gyxt-server</artifactId>
+        <version>${parent.version}</version>
+  	</dependency>
+  	
+  	<!-- 添加gyxt-shiro的依赖关系 -->
+  	<dependency>
+  		<groupId>cn.ekgc.gyxt</groupId>
+        <artifactId>gyxt-shiro</artifactId>
+        <version>${parent.version}</version>
+  	</dependency>
+  
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
